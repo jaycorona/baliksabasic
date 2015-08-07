@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Cookie</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script></head>
+<body>
+	
+<form>
+	<p>Using Cookie</p>
+	<div class="txtinput">
+		<input type="text" class="section" name="name" placeholder="name"> <br>
+		<input type="text" class="section" name="nickname" placeholder="nickname"> <br>
+		<input type="text" class="section" name="email" placeholder="email"> <br>
+		<input type="text" class="section" name="postcode" placeholder="postcode"> <br>
+		<input type="text" class="section" name="address" placeholder="address"> <br>
+
+		<select name="gender" class="section " type="select"><br>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+		</select><br><br>
+
+		<button type="button" class="btn-done">Done</button>	
+	</div>
+
+</form>
+<script type="text/javascript">
+$(document).ready(function () {
+
+	if($.cookie('cookie_name_ni')){
+		  var sections = JSON.parse( $.cookie('cookie_name_ni') );
+          console.log(sections);
+            for( var i=0; i<sections.length; i++ ){
+                	
+                	$('.section').each(function () {
+                		var attr = $(this).attr('name');
+	                	if (attr == sections[i].name) {
+
+	                		$(this).val(sections[i].value);
+
+						}
+                	});
+              
+            }
+            
+	}else{
+		alert('No Cookie!..');
+	}
+
+	$('.btn-done').click(function () {
+			var hostname 	= $(location).attr('hostname');
+			
+			$.removeCookie("cookie_name_ni");
+			setTimeout(function(){  $(location).attr('href',"http://"+hostname+"/index.html"); }, 1000);
+
+
+	});
+
+
+});
+
+</script>
+</body>
+</html>
+
+
